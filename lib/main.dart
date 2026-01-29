@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:share_plus/share_plus.dart';
 import 'package:image/image.dart' as img;
 import 'favorites_service.dart';
@@ -27,6 +27,7 @@ class ChehelHadithApp extends StatelessWidget {
     final baseTheme = ThemeData(
       useMaterial3: true,
       colorSchemeSeed: const Color(0xFF5E35B1), // بنفش شیک
+      fontFamily: 'Vazirmatn',
       brightness: Brightness.light,
     );
 
@@ -41,7 +42,7 @@ class ChehelHadithApp extends StatelessWidget {
         );
       },
       theme: baseTheme.copyWith(
-        textTheme: GoogleFonts.vazirmatnTextTheme(baseTheme.textTheme),
+        // textTheme: GoogleFonts.vazirmatnTextTheme(baseTheme.textTheme),
         scaffoldBackgroundColor: const Color(0xFFF5F3FF),
         appBarTheme: baseTheme.appBarTheme.copyWith(
           backgroundColor: Colors.transparent,
@@ -266,7 +267,7 @@ class _SplashScreenState extends State<SplashScreen>
                           children: [
                             Text(
                               'چهل حدیث',
-                              style: GoogleFonts.vazirmatn(
+                              style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 42,
                                 fontWeight: FontWeight.w800,
@@ -293,7 +294,7 @@ class _SplashScreenState extends State<SplashScreen>
                             Text(
                               'گزیده‌ای از احادیث اهل‌بیت (ع)',
                               textAlign: TextAlign.center,
-                              style: GoogleFonts.vazirmatn(
+                              style: TextStyle(
                                 color: Colors.white.withOpacity(0.95),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -304,7 +305,7 @@ class _SplashScreenState extends State<SplashScreen>
                             Text(
                               'با شرح و تفسیر کاربردی',
                               textAlign: TextAlign.center,
-                              style: GoogleFonts.vazirmatn(
+                              style: TextStyle(
                                 color: Colors.white.withOpacity(0.85),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -360,7 +361,7 @@ class _SplashScreenState extends State<SplashScreen>
                             const SizedBox(width: 8),
                             Text(
                               'برنامه‌نویس: حسین طاهری کندر',
-                              style: GoogleFonts.vazirmatn(
+                              style: TextStyle(
                                 color: Colors.white.withOpacity(0.95),
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
@@ -863,19 +864,19 @@ class _HadithDetailPageState extends State<HadithDetailPage> {
       builder: (context) => AlertDialog(
         title: Text(
           'نوع اشتراک‌گذاری',
-          style: GoogleFonts.vazirmatn(),
+          style: TextStyle(),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
               leading: const Icon(Icons.image),
-              title: Text('اشتراک تصویر', style: GoogleFonts.vazirmatn()),
+              title: Text('اشتراک تصویر', style: TextStyle()),
               onTap: () => Navigator.of(context).pop('image'),
             ),
             ListTile(
               leading: const Icon(Icons.text_fields),
-              title: Text('اشتراک متن', style: GoogleFonts.vazirmatn()),
+              title: Text('اشتراک متن', style: TextStyle()),
               onTap: () => Navigator.of(context).pop('text'),
             ),
           ],
@@ -1109,7 +1110,7 @@ class _HadithDetailPageState extends State<HadithDetailPage> {
                       const SizedBox(width: 6),
                       Text(
                         widget.hadith.category!,
-                        style: GoogleFonts.vazirmatn(
+                        style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -1129,7 +1130,7 @@ class _HadithDetailPageState extends State<HadithDetailPage> {
                 Expanded(
                   child: Text(
                     widget.hadith.speaker!,
-                    style: GoogleFonts.vazirmatn(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -1147,7 +1148,7 @@ class _HadithDetailPageState extends State<HadithDetailPage> {
               Expanded(
                 child: Text(
                   widget.hadith.source,
-                  style: GoogleFonts.vazirmatn(
+                  style: TextStyle(
                     color: Colors.white.withOpacity(0.9),
                     fontSize: 13,
                   ),
@@ -1204,7 +1205,7 @@ class _HadithDetailPageState extends State<HadithDetailPage> {
             child: SelectableText(
               widget.hadith.shortText,
               textAlign: TextAlign.right,
-              style: GoogleFonts.vazirmatn(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
                 height: 1.8,
@@ -1223,7 +1224,7 @@ class _HadithDetailPageState extends State<HadithDetailPage> {
           child: SelectableText(
             widget.hadith.body,
             textAlign: TextAlign.right,
-            style: GoogleFonts.vazirmatn(
+            style: TextStyle(
               fontSize: 15,
               height: 1.7,
               color: const Color(0xFF374151),
@@ -1270,7 +1271,7 @@ class _HadithDetailPageState extends State<HadithDetailPage> {
           child: SelectableText(
             widget.hadith.tafseer,
             textAlign: TextAlign.right,
-            style: GoogleFonts.vazirmatn(
+            style: TextStyle(
               fontSize: 15,
               height: 1.8,
               color: const Color(0xFF374151),
@@ -1316,7 +1317,7 @@ class _HadithDetailPageState extends State<HadithDetailPage> {
           child: SelectableText(
             widget.hadith.practicalTip!,
             textAlign: TextAlign.right,
-            style: GoogleFonts.vazirmatn(
+            style: TextStyle(
               fontSize: 15,
               height: 1.8,
               color: const Color(0xFF374151),
@@ -1368,7 +1369,7 @@ class _HadithDetailPageState extends State<HadithDetailPage> {
                 child: SelectableText(
                   widget.hadith.practicalChallenge!,
                   textAlign: TextAlign.right,
-                  style: GoogleFonts.vazirmatn(
+                  style: TextStyle(
                     fontSize: 15,
                     height: 1.7,
                     color: const Color(0xFF1F2933),
@@ -1574,7 +1575,7 @@ class AboutPage extends StatelessWidget {
                   children: [
                     Text(
                       'برنامه‌نویس',
-                      style: GoogleFonts.vazirmatn(
+                      style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                         color: Colors.grey.shade700,
@@ -1583,7 +1584,7 @@ class AboutPage extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       'حسین طاهری کندر',
-                      style: GoogleFonts.vazirmatn(
+                      style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
                         color: const Color(0xFF5E35B1),
@@ -1614,8 +1615,8 @@ class AboutPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                '🌿 درباره «چهل حدیث»',
-                style: GoogleFonts.vazirmatn(
+                'درباره «چهل حدیث»',
+                style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,
                   color: const Color(0xFF1F2933),
@@ -1643,7 +1644,7 @@ class AboutPage extends StatelessWidget {
                     Text(
                       'چهل حدیث تلاشی است برای نزدیک‌تر کردن کلام نورانی اهل‌بیت (ع) به زندگی امروز ما؛',
                       textAlign: TextAlign.right,
-                      style: GoogleFonts.vazirmatn(
+                      style: TextStyle(
                         fontSize: 15,
                         height: 1.8,
                         color: const Color(0xFF374151),
@@ -1653,7 +1654,7 @@ class AboutPage extends StatelessWidget {
                     Text(
                       'نه فقط برای خواندن،',
                       textAlign: TextAlign.right,
-                      style: GoogleFonts.vazirmatn(
+                      style: TextStyle(
                         fontSize: 15,
                         height: 1.8,
                         color: const Color(0xFF374151),
@@ -1664,7 +1665,7 @@ class AboutPage extends StatelessWidget {
                     Text(
                       'بلکه برای فهمیدن، تأمل کردن و زندگی کردن.',
                       textAlign: TextAlign.right,
-                      style: GoogleFonts.vazirmatn(
+                      style: TextStyle(
                         fontSize: 15,
                         height: 1.8,
                         color: const Color(0xFF374151),
@@ -1675,7 +1676,7 @@ class AboutPage extends StatelessWidget {
                     Text(
                       'در دنیایی که سرعت، شلوغی و فشارهای ذهنی ما را از خودمان دور کرده‌اند،',
                       textAlign: TextAlign.right,
-                      style: GoogleFonts.vazirmatn(
+                      style: TextStyle(
                         fontSize: 15,
                         height: 1.8,
                         color: const Color(0xFF374151),
@@ -1685,7 +1686,7 @@ class AboutPage extends StatelessWidget {
                     Text(
                       'این برنامه طراحی شده تا با زبانی ساده، نگاهی کاربردی و تفسیری کوتاه،',
                       textAlign: TextAlign.right,
-                      style: GoogleFonts.vazirmatn(
+                      style: TextStyle(
                         fontSize: 15,
                         height: 1.8,
                         color: const Color(0xFF374151),
@@ -1695,7 +1696,7 @@ class AboutPage extends StatelessWidget {
                     Text(
                       'احادیث را از کتاب‌ها به دل زندگی روزمره بیاورد.',
                       textAlign: TextAlign.right,
-                      style: GoogleFonts.vazirmatn(
+                      style: TextStyle(
                         fontSize: 15,
                         height: 1.8,
                         color: const Color(0xFF374151),
@@ -1714,7 +1715,7 @@ class AboutPage extends StatelessWidget {
                           Text(
                             'هر حدیث در این برنامه:',
                             textAlign: TextAlign.right,
-                            style: GoogleFonts.vazirmatn(
+                            style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
                               color: const Color(0xFF5E35B1),
@@ -1732,7 +1733,7 @@ class AboutPage extends StatelessWidget {
                     Text(
                       '🌱 این برنامه نه یک مجموعه صرفاً مذهبی است',
                       textAlign: TextAlign.right,
-                      style: GoogleFonts.vazirmatn(
+                      style: TextStyle(
                         fontSize: 15,
                         height: 1.8,
                         color: const Color(0xFF374151),
@@ -1743,7 +1744,7 @@ class AboutPage extends StatelessWidget {
                     Text(
                       'و نه یک محتوای سنگین علمی؛',
                       textAlign: TextAlign.right,
-                      style: GoogleFonts.vazirmatn(
+                      style: TextStyle(
                         fontSize: 15,
                         height: 1.8,
                         color: const Color(0xFF374151),
@@ -1753,7 +1754,7 @@ class AboutPage extends StatelessWidget {
                     Text(
                       'بلکه همراهی آرام برای رشد اخلاقی، خودسازی و بهتر زیستن است.',
                       textAlign: TextAlign.right,
-                      style: GoogleFonts.vazirmatn(
+                      style: TextStyle(
                         fontSize: 15,
                         height: 1.8,
                         color: const Color(0xFF374151),
@@ -1772,7 +1773,7 @@ class AboutPage extends StatelessWidget {
                       child: Text(
                         '**اگر حتی یک حدیث باعث تغییر کوچک در نگاه یا رفتار ما شود،\nهدف این برنامه محقق شده است.**',
                         textAlign: TextAlign.right,
-                        style: GoogleFonts.vazirmatn(
+                        style: TextStyle(
                           fontSize: 14,
                           height: 1.7,
                           color: const Color(0xFF059669),
@@ -1787,7 +1788,7 @@ class AboutPage extends StatelessWidget {
               Text(
                 'تمام حقوق معنوی برای سازنده محفوظ است.\nاستفاده و نشر با ذکر منبع بلامانع است.',
                 textAlign: TextAlign.center,
-                style: GoogleFonts.vazirmatn(
+                style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey.shade600,
                   height: 1.6,
@@ -1819,7 +1820,7 @@ class AboutPage extends StatelessWidget {
             child: Text(
               text,
               textAlign: TextAlign.right,
-              style: GoogleFonts.vazirmatn(
+              style: TextStyle(
                 fontSize: 14,
                 height: 1.6,
                 color: const Color(0xFF374151),
@@ -1894,7 +1895,7 @@ class _AppDrawer extends StatelessWidget {
                   const SizedBox(height: 20),
                   Text(
                     'چهل حدیث',
-                    style: GoogleFonts.vazirmatn(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 28,
                       fontWeight: FontWeight.w800,
@@ -1913,7 +1914,7 @@ class _AppDrawer extends StatelessWidget {
                   const SizedBox(height: 12),
                   Text(
                     'نسخه آفلاین',
-                    style: GoogleFonts.vazirmatn(
+                    style: TextStyle(
                       color: Colors.white.withOpacity(0.95),
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
@@ -1922,7 +1923,7 @@ class _AppDrawer extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     'با شرح و تفسیر کامل',
-                    style: GoogleFonts.vazirmatn(
+                    style: TextStyle(
                       color: Colors.white.withOpacity(0.85),
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -2011,7 +2012,7 @@ class _AppDrawer extends StatelessWidget {
                       const SizedBox(width: 6),
                       Text(
                         'حسین طاهری کندر',
-                        style: GoogleFonts.vazirmatn(
+                        style: TextStyle(
                           color: Colors.grey.shade700,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -2022,7 +2023,7 @@ class _AppDrawer extends StatelessWidget {
                   const SizedBox(height: 6),
                   Text(
                     'نسخه 1.0.0',
-                    style: GoogleFonts.vazirmatn(
+                    style: TextStyle(
                       color: Colors.grey.shade500,
                       fontSize: 11,
                     ),
@@ -2097,7 +2098,7 @@ class _DrawerMenuItem extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: GoogleFonts.vazirmatn(
+                    style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
                       color: const Color(0xFF1F2933),
@@ -2106,7 +2107,7 @@ class _DrawerMenuItem extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     subtitle,
-                    style: GoogleFonts.vazirmatn(
+                    style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       color: Colors.grey.shade600,
