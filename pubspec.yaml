@@ -1,21 +1,5 @@
 name: chehel_hadith_app
-description: اپلیکیشن آفلاین چهل حدیث با شرح، برای اندروید (Flutter)
-publish_to: "none"
-
-version: 1.0.0+1
-
-environment:
-  sdk: ">=3.3.0 <4.0.0"
-
-dependencies:
-  flutter:
-    sdk: flutter
-
-  cupertino_icons: ^1.0.8
-  shareخه نهایی و قطعی)
-```yaml
-name: chehel_hadith_app
-description: اپلیکیشن آفلاین چهل حدیث با شرح، برای اندروید (Flutter)
+description: اپلیکیشن آفلاین چهل حدیث با شرح
 publish_to: "none"
 
 version: 1.0.0+1
