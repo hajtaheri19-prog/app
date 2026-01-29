@@ -13,12 +13,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ✅ Java 17 (الزامی برای Gradle جدید)
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
+      # ✅ Flutter نسخه سازگار با Dart ≥ 3.8
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -29,12 +31,20 @@ jobs:
       - name: Disable Flutter analytics
         run: flutter config --no-analytics
 
+      # ✅ نصب دستی Android SDK + CMake (حل خطای Connection refused)
+      - name: Install Android SDK components
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+          sdkmanager "cmake;3.22.1"
+
       - name: Flutter doctor
         run: flutter doctor -v
 
       - name: Get dependencies
         run: flutter pub get
 
+      # ✅ Build نهایی APK
       - name: Build APK (release)
         run: flutter build apk --release
 
