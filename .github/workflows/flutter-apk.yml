@@ -10,44 +10,53 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ دریافت سورس
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ✅ Java 17 (الزامی برای Gradle جدید)
-      - name: Set up Java
+      # 2️⃣ جاوا سازگار با Gradle جدید
+      - name: Set up Java 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '17'
 
-      # ✅ Flutter نسخه سازگار با Dart ≥ 3.8
+      # 3️⃣ Flutter (Dart >= 3.8)
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.38.7'
-          channel: 'stable'
+          channel: stable
           cache: true
 
       - name: Disable Flutter analytics
         run: flutter config --no-analytics
 
-      # ✅ نصب دستی Android SDK + CMake (حل خطای Connection refused)
+      # ✅ 4️⃣ مهم‌ترین بخش: Android SDK + sdkmanager
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      # ✅ 5️⃣ نصب دستی CMake قبل از Gradle
       - name: Install Android SDK components
         run: |
           yes | sdkmanager --licenses
-          sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
-          sdkmanager "cmake;3.22.1"
+          sdkmanager \
+            "platform-tools" \
+            "platforms;android-36" \
+            "build-tools;36.0.0" \
+            "cmake;3.22.1"
 
       - name: Flutter doctor
         run: flutter doctor -v
 
-      - name: Get dependencies
+      - name: Get Flutter dependencies
         run: flutter pub get
 
-      # ✅ Build نهایی APK
+      # 6️⃣ Build APK
       - name: Build APK (release)
         run: flutter build apk --release
 
+      # 7️⃣ آپلود خروجی
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
