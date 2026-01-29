@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ دریافت سورس
+      # 1️⃣ Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ نصب Flutter (سازگار با Dart پروژه)
+      # 2️⃣ Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -23,18 +23,18 @@ jobs:
           channel: stable
           cache: true
 
-      # 3️⃣ نصب Java (سازگار با Android Gradle Plugin)
+      # 3️⃣ Java 17
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
+          distribution: temurin
           java-version: "17"
 
-      # 4️⃣ نصب Android SDK
+      # 4️⃣ Android SDK
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      # 5️⃣ نصب کامپوننت‌های لازم Android (CMake و ...)
+      # 5️⃣ Android components (CMake و ...)
       - name: Install Android SDK components
         run: |
           yes | sdkmanager --licenses
@@ -44,24 +44,21 @@ jobs:
             "build-tools;36.0.0" \
             "cmake;3.22.1"
 
-      # 6️⃣ Flutter doctor (داخل app)
+      # 6️⃣ Flutter doctor (مهم)
       - name: Flutter doctor
         run: flutter doctor -v
-        working-directory: app
 
-      # 7️⃣ دریافت پکیج‌ها
+      # 7️⃣ Dependencies
       - name: Flutter pub get
         run: flutter pub get
-        working-directory: app
 
-      # 8️⃣ Build APK با entry point مشخص
+      # 8️⃣ Build APK (entry point مشخص)
       - name: Build release APK
         run: flutter build apk --release -t lib/main.dart
-        working-directory: app
 
-      # 9️⃣ آپلود خروجی APK
+      # 9️⃣ Upload APK
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-release-apk
-          path: app/build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
