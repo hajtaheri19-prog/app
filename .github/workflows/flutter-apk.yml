@@ -10,16 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: app
-
     steps:
       # 1️⃣ دریافت سورس
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ نصب Flutter (نسخه‌ای که Dart 3.8+ دارد)
+      # 2️⃣ نصب Flutter (سازگار با Dart پروژه)
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -27,11 +23,18 @@ jobs:
           channel: stable
           cache: true
 
-      # 3️⃣ نصب Android SDK
+      # 3️⃣ نصب Java (سازگار با Android Gradle Plugin)
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      # 4️⃣ نصب Android SDK
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      # 4️⃣ نصب کامپوننت‌های ضروری (حل قطعی مشکل CMake)
+      # 5️⃣ نصب کامپوننت‌های لازم Android (CMake و ...)
       - name: Install Android SDK components
         run: |
           yes | sdkmanager --licenses
@@ -41,19 +44,22 @@ jobs:
             "build-tools;36.0.0" \
             "cmake;3.22.1"
 
-      # 5️⃣ بررسی Flutter
+      # 6️⃣ Flutter doctor (داخل app)
       - name: Flutter doctor
         run: flutter doctor -v
+        working-directory: app
 
-      # 6️⃣ دریافت پکیج‌ها
+      # 7️⃣ دریافت پکیج‌ها
       - name: Flutter pub get
         run: flutter pub get
+        working-directory: app
 
-      # 7️⃣ Build APK (نکته مهم: target = lib/main.dart)
+      # 8️⃣ Build APK با entry point مشخص
       - name: Build release APK
         run: flutter build apk --release -t lib/main.dart
+        working-directory: app
 
-      # 8️⃣ آپلود خروجی
+      # 9️⃣ آپلود خروجی APK
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
